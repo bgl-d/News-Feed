@@ -7,7 +7,8 @@ app = FastAPI()
 
 # Setup for Jinja2 templates
 templates = Jinja2Templates(directory='templates')
-app.mount('/static', StaticFiles    (directory='static'), name='static')
+app.mount('/static', StaticFiles(directory='static'), name='static')
+app.mount("/media", StaticFiles(directory="media"), name="media")
 
 @app.get('/')
 def home(request: Request):
