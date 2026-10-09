@@ -15,34 +15,41 @@
 
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light floating-navbar">
-    <div class="navbar-collapse">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="#">News</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Following</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+  <!-- Navbar -->
+  <div class="header">
+    <button type="button" class="btn rounded-circle" title="new post" id="create-post-button">+</button>
+    <nav class="navbar navbar-expand-lg navbar-light floating-navbar">
+      <div class="navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">News</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="follow">Following</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <button type="button" class="btn rounded-circle" id="logout-button" title="log out">|-></button>
+  </div>
+
+  <!-- Feed -->
   <div class="container feed">
-    <div class="media">
+    <div class="media" id="media-1">
       <img class="mr-3 news-image" src="{{ url_for('media', path='images/df7o6opc_nobel-price-in-physics-_650x400_06_October_26.jpg.webp') }}">
       <div class="media-body">
         <h3 class="mt-0">The Nobel Prize in Physics in 2026</h3>
-        The 2026 Nobel Prize in Physics was awarded to Francis Halzen for his foundational role in establishing the IceCube Neutrino Observatory at the South Pole and detecting high-energy cosmic neutrinos. His pioneering work opened a new era of multi-messenger astronomy by capturing non-light particles from distant cosmic phenomena.
+        <p>The 2026 Nobel Prize in Physics was awarded to Francis Halzen for his foundational role in establishing the IceCube Neutrino Observatory at the South Pole and detecting high-energy cosmic neutrinos. His pioneering work opened a new era of multi-messenger astronomy by capturing non-light particles from distant cosmic phenomena.</p>
       </div>
     </div>
-    <div class="media">
-      <img class="mr-3 news-image" src="{{ url_for('media', path='images/df7o6opc_nobel-price-in-physics-_650x400_06_October_26.jpg.webp') }}">
+    <div class="media" id="media-2">
+      <img class="mr-3 news-image" id="media-2-img">
       <div class="media-body">
-        <h3 class="mt-0">The Nobel Prize in Physics in 2026</h3>
-        The 2026 Nobel Prize in Physics was awarded to Francis Halzen for his foundational role in establishing the IceCube Neutrino Observatory at the South Pole and detecting high-energy cosmic neutrinos. His pioneering work opened a new era of multi-messenger astronomy by capturing non-light particles from distant cosmic phenomena.
+        <h3 class="mt-0" id="media-body-title-2"></h3>
+        <p id="media-body-text-2"></p>
       </div>
     </div>
-    <div class="media">
+    <div class="media" id="media-3">
       <img class="mr-3 news-image" src="{{ url_for('media', path='images/df7o6opc_nobel-price-in-physics-_650x400_06_October_26.jpg.webp') }}">
       <div class="media-body">
         <h3 class="mt-0">The Nobel Prize in Physics in 2026</h3>
@@ -50,7 +57,17 @@
       </div>
     </div>
   </div>
-  <div class="page-selector">
-    <p>1 2 3 4 5 6 ... 28</p>
+
+  <!-- Pagination -->
+  <div class="pagination">
+    <a class="page-turn" href="#"><-</a>
+    <a class="page-num" href="/page=1">1</a>
+    <a class="page-num active" href="/page=1">2</a>
+    <a class="page-num" href="#">3</a>
+    <a class="page-num" href="#">...</a>
+    <a class="page-num" href="#">N</a>
+    <a class="page-turn" href="#">-></a>
   </div>
+
+  <script src="{{ url_for('static', path='load_posts.js') }}"></script>
 </body>
