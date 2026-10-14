@@ -2,14 +2,22 @@ from fastapi import Response, APIRouter
 
 auth = APIRouter()
 
-@auth.put('/login')
-async def login():
+@auth.get('/auth')
+async def auth():
     ...
 
-@auth.get('/logout')
-async def logout(response: Response):
+@auth.get('/sign-up')
+async def sign_up_page():
     ...
 
-@auth.put('/sign-up')
+@auth.post('/sign-up')
 async def sign_up():
+    ...
+
+@auth.get('/login')
+async def login_page():
+    ...
+
+@auth.post('/login')
+async def login():
     ...

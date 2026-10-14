@@ -75,6 +75,9 @@ body {
   flex: 1;
   align-items: center;
 }
+.news-image {
+  border-radius: 10px;
+}
 
 .pagination {
   display: flex;
@@ -98,4 +101,52 @@ body {
 .page-num:hover:not(.active) {
   border-radius: 100%;
   background-color: #ddd;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  display: none;
+}
+
+.form-popup {
+  display: none;
+  position: fixed;
+  align-self: center;
+  z-index: 1001;
+  margin-top: 10rem;
+}
+
+.form-container {
+  width: min(50vw, 500px);
+  height: min(20vw, 200px);
+  max-width: 800px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.form-container input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-container .input-group + .input-group {
+  margin-top: 1rem;
+}
+
+#post-btn{
+  display: block;
+  margin: 1rem auto 0;
+  background-color: rgb(230, 230, 230);
+  max-width: 100px;
+  max-height: 40px;
+  color: rgba(0, 0, 0, 0.5)
+}
+
+#post-btn:hover{
+  color: rgba(0, 0, 0, 0.7);
 }

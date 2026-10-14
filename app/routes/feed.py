@@ -1,16 +1,31 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
+from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import RedirectResponse
 
 feed = APIRouter()
 
+# Setup for Jinja2 templates
+templates = Jinja2Templates(directory='templates')
+feed.mount('/static', StaticFiles(directory='static'), name='static')
+feed.mount("/media", StaticFiles(directory="media"), name="media")
+
+@feed.get('/')
+def home_redirect():
+    return RedirectResponse(url="/feed")
+
 @feed.get('/feed')
-async def read_posts():
-    ...
+def home(request: Request):
+    return templates.TemplateResponse(
+        name='feed.html',
+        request=request
+    )
+    
 
-@feed.get('/feed/{item_id}')
-async def read_item(item_id: int):
-    ...
+# @feed.get('/')
+# def read_posts():
+#     ...
 
-@feed.put('/feed/create_post')
-async def create_post(text: str, media_link: str):
-    ...
-
+# @feed.post('/feed/new-post')
+# def create_post(text: str, media_link: str):
+#     ...

@@ -1,3 +1,4 @@
+# for classes and database manegment
 from sqlalchemy import Column, Integer, String, Text, Time
 from sqlalchemy.ext.declarative import declarative_base
 

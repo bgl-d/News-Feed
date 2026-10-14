@@ -17,15 +17,15 @@
 <body>
   <!-- Navbar -->
   <div class="header">
-    <button type="button" class="btn rounded-circle" title="new post" id="create-post-button">+</button>
+    <button type="button" class="btn rounded-circle" title="new post" id="create-post-button" onclick="openForm()">+</button>
     <nav class="navbar navbar-expand-lg navbar-light floating-navbar">
       <div class="navbar-collapse">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="/">News</a>
+            <a class="nav-link" href="/feed">News</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="follow">Following</a>
+            <a class="nav-link" href="/feed/follow">Following</a>
           </li>
         </ul>
       </div>
@@ -62,11 +62,37 @@
   <div class="pagination">
     <a class="page-turn" href="#"><-</a>
     <a class="page-num" href="/page=1">1</a>
-    <a class="page-num active" href="/page=1">2</a>
+    <a class="page-num active" href="/page=2">2</a>
     <a class="page-num" href="#">3</a>
     <a class="page-num" href="#">...</a>
     <a class="page-num" href="#">N</a>
     <a class="page-turn" href="#">-></a>
+  </div>
+  
+<div class="overlay" id="overlay" onclick="closeForm()"></div>
+
+  <div class="form-popup" id="createNewPost">
+    <form class="form-container">
+      <div class="input-group">
+        <label for="edia-link"></label> <br/>
+        <input id="media-link" name="media link" placeholder="Media link" required />
+        <br/>
+      </div>
+
+      <div class="input-group">
+        <label for="title"></label> <br />
+          <input type="text" id="title" name="title" placeholder="Post title" required />
+        <br />
+      </div>
+
+      <div class="input-group">
+        <label for="text"></label> <br />
+        <input type="text" id="text" name="text" placeholder="Text" required />
+        <br />
+      </div>
+
+      <button type="button" class="btn" id="post-btn" title="post" onclick="closeForm()">Post</button>
+    </form>
   </div>
 
   <script src="{{ url_for('static', path='load_posts.js') }}"></script>
