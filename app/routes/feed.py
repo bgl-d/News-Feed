@@ -2,13 +2,17 @@ from fastapi import APIRouter, Request
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import RedirectResponse
-from dependencies import Post
+from sqlalchemy.orm import sessionmaker
+from dependencies import Base, Post, get_connection
 
 
 feed = APIRouter()
 templates = Jinja2Templates(directory='templates')
 feed.mount('/static', StaticFiles(directory='static'), name='static')
 feed.mount("/media", StaticFiles(directory="media"), name="media")
+engine = get_connection()
+Base.metadata.create_all(engine)
+Session = sessionmaker(bind=engine)
 
 
 @feed.get('/')
@@ -25,14 +29,14 @@ def home(request: Request):
 
 
 @feed.get('/api/load_posts', response_model=list[Post])
-def get_posts():
+def build_feed():
     return [
         {"title": "Nobel Prize 2026 in Physics", "text": "Franz Holsen", "mediaLink": "media/images/df7o6opc_nobel-price-in-physics-_650x400_06_October_26.jpg.webp"}
     ]
 
 
 @feed.post('/api/create_post')
-def create_post():
+def post():
     post1 = Post(author_handle='', 
             title='', 
             text_content='', 
