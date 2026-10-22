@@ -2,17 +2,15 @@ from fastapi import APIRouter, Request
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import RedirectResponse
-from sqlalchemy.orm import sessionmaker
-from dependencies import Base, Post, get_connection
+from models import Base, Post
+from database import get_db, engine
 
 
 feed = APIRouter()
 templates = Jinja2Templates(directory='templates')
 feed.mount('/static', StaticFiles(directory='static'), name='static')
 feed.mount("/media", StaticFiles(directory="media"), name="media")
-engine = get_connection()
 Base.metadata.create_all(engine)
-Session = sessionmaker(bind=engine)
 
 
 @feed.get('/')
