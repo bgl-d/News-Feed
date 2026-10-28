@@ -13,5 +13,5 @@ class Post(Base):
     author_handle: Mapped[str] = mapped_column(String(50))
     title: Mapped[str] = mapped_column(String(50))
     text_content: Mapped[str] = mapped_column(String(200))
-    media_storage_key: Mapped[str]
+    media_link: Mapped[str]
     created_at: Mapped[datetime] = mapped_column(server_default=func.now())

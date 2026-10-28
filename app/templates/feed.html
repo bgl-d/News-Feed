@@ -36,10 +36,10 @@
   <!-- Feed -->
   <div class="container feed">
     <div class="media" id="media-1">
-      <img class="mr-3 news-image" src="{{ url_for('media', path='images/df7o6opc_nobel-price-in-physics-_650x400_06_October_26.jpg.webp') }}">
+      <img class="mr-3 news-image" id="media-1-img">
       <div class="media-body">
-        <h3 class="mt-0">The Nobel Prize in Physics in 2026</h3>
-        <p>The 2026 Nobel Prize in Physics was awarded to Francis Halzen for his foundational role in establishing the IceCube Neutrino Observatory at the South Pole and detecting high-energy cosmic neutrinos. His pioneering work opened a new era of multi-messenger astronomy by capturing non-light particles from distant cosmic phenomena.</p>
+        <h3 class="mt-0" id="media-body-title-1"></h3>
+        <p id="media-body-text-1"></p>
       </div>
     </div>
     <div class="media" id="media-2">
@@ -50,23 +50,17 @@
       </div>
     </div>
     <div class="media" id="media-3">
-      <img class="mr-3 news-image" src="{{ url_for('media', path='images/df7o6opc_nobel-price-in-physics-_650x400_06_October_26.jpg.webp') }}">
+      <img class="mr-3 news-image" id="media-3-img">
       <div class="media-body">
-        <h3 class="mt-0">The Nobel Prize in Physics in 2026</h3>
-        The 2026 Nobel Prize in Physics was awarded to Francis Halzen for his foundational role in establishing the IceCube Neutrino Observatory at the South Pole and detecting high-energy cosmic neutrinos. His pioneering work opened a new era of multi-messenger astronomy by capturing non-light particles from distant cosmic phenomena.
+        <h3 class="mt-0" id="media-body-title-3"></h3>
+        <p id="media-body-text-3"></p>
       </div>
     </div>
   </div>
 
   <!-- Pagination -->
   <div class="pagination">
-    <a class="page-turn" href="#"><-</a>
-    <a class="page-num" href="/page=1">1</a>
-    <a class="page-num active" href="/page=2">2</a>
-    <a class="page-num" href="#">3</a>
-    <a class="page-num" href="#">...</a>
-    <a class="page-num" href="#">N</a>
-    <a class="page-turn" href="#">-></a>
+    <a class="page-btn active" value=1 onclick="setActive(this)">1</a>
   </div>
   
 <div class="overlay" id="overlay" onclick="closeForm()"></div>
@@ -74,24 +68,24 @@
   <div class="form-popup" id="createNewPost">
     <form class="form-container">
       <div class="input-group">
-        <label for="edia-link"></label> <br/>
-        <input id="media-link" name="media link" placeholder="Media link" required />
+        <label for="media-link"></label> <br/>
+        <input id="new-media-link" name="media link" placeholder="Media link" required />
         <br/>
       </div>
 
       <div class="input-group">
         <label for="title"></label> <br />
-          <input type="text" id="title" name="title" placeholder="Post title" required />
+          <input type="text" id="new-title" name="title" placeholder="Post title" required />
         <br />
       </div>
 
       <div class="input-group">
         <label for="text"></label> <br />
-        <input type="text" id="text" name="text" placeholder="Text" required />
+        <input type="text" id="new-text" name="text" placeholder="Text" required />
         <br />
       </div>
 
-      <button type="button" class="btn" id="post-btn" title="post" onclick="closeForm()">Post</button>
+      <button type="button" class="btn" id="post-btn" title="post" onclick="createPost(); closeForm(); createPagination()">Post</button>
     </form>
   </div>
 

@@ -1,9 +1,12 @@
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, Depends
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import RedirectResponse
-from models import Base, Post
-from database import get_db, engine
+from sqlalchemy.orm import Session
+from sqlalchemy import desc, insert
+from .models import Base, Post
+from .database import get_db, engine
+from .schemas import PostCreate
 
 
 feed = APIRouter()
@@ -13,6 +16,7 @@ feed.mount("/media", StaticFiles(directory="media"), name="media")
 Base.metadata.create_all(engine)
 
 
+# Rewrite later to redirect to auth
 @feed.get('/')
 def home_redirect():
     return RedirectResponse(url="/feed")
@@ -22,21 +26,41 @@ def home_redirect():
 def home(request: Request):
     return templates.TemplateResponse(
         name='feed.html',
-        request=request
+        request=request,
     )  
 
 
-@feed.get('/api/load_posts', response_model=list[Post])
-def build_feed():
-    return [
-        {"title": "Nobel Prize 2026 in Physics", "text": "Franz Holsen", "mediaLink": "media/images/df7o6opc_nobel-price-in-physics-_650x400_06_October_26.jpg.webp"}
-    ]
+@feed.get('/load-posts/posts/{page_num}')
+def build_feed(page_num: int, db: Session = Depends(get_db)):
+    posts = (
+        db.query(Post)
+        .order_by(desc(Post.created_at))
+        .limit(3)
+        .offset((page_num-1)*3)
+    )
+    result = []
+    for post in posts:
+        item = {
+            "title": post.title, 
+            "text": post.text_content, 
+            "media_link": post.media_link
+        }
+        result.append(item)
+    return result
 
 
-@feed.post('/api/create_post')
-def post():
-    post1 = Post(author_handle='', 
-            title='', 
-            text_content='', 
-            media_storage_key='')
-    return post1
+@feed.get('/load-posts/total-posts')
+def build_feed(db: Session = Depends(get_db)):
+    return db.query(Post).count()
+
+
+@feed.post('/create-post')
+def create_post(post: PostCreate, db: Session = Depends(get_db)):
+    new_post = Post(
+        author_handle='some_user',
+        title=post.title,
+        text_content=post.text_content,
+        media_link=post.media_link,
+    )
+    db.add(new_post)
+    db.flush()
