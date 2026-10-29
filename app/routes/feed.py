@@ -43,7 +43,8 @@ def build_feed(page_num: int, db: Session = Depends(get_db)):
         item = {
             "title": post.title, 
             "text": post.text_content, 
-            "media_link": post.media_link
+            "media_link": post.media_link,
+            "created_at": post.created_at.strftime("%d %b %Y")
         }
         result.append(item)
     return result
