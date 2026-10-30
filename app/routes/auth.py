@@ -1,23 +1,23 @@
-from fastapi import Response, APIRouter
+from fastapi import APIRouter, Request
+from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
 
 auth = APIRouter()
+templates = Jinja2Templates(directory='templates')
+auth.mount('/static', StaticFiles(directory='static'), name='static')
+auth.mount("/media", StaticFiles(directory="media"), name="media")
 
 @auth.get('/auth')
-async def auth():
+async def authantification(request: Request):
+    return templates.TemplateResponse(
+        name='auth.html',
+        request=request,
+    )  
+
+@auth.post('/auth/sign-up')
+async def sign_up(request: Request):
     ...
 
-@auth.get('/sign-up')
-async def sign_up_page():
-    ...
-
-@auth.post('/sign-up')
-async def sign_up():
-    ...
-
-@auth.get('/login')
-async def login_page():
-    ...
-
-@auth.post('/login')
-async def login():
+@auth.get('/auth/sign-up')
+async def sign_up(request: Request):
     ...

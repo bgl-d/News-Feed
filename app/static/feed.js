@@ -122,8 +122,6 @@ async function createPagination(){
     const pages = Array.from(document.getElementsByClassName('page-btn'));
     
     for (const page of pages) {
-      console.log(pages.length)
-      console.log(page.length)
       let value = Number(page.getAttribute('value'))
       if (value > MYAPP.last_existing_page) {
         MYAPP.last_existing_page = value;

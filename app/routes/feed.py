@@ -3,7 +3,7 @@ from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
-from sqlalchemy import desc, insert
+from sqlalchemy import desc
 from .models import Base, Post
 from .database import get_db, engine
 from .schemas import PostCreate
@@ -58,7 +58,7 @@ def build_feed(db: Session = Depends(get_db)):
 @feed.post('/create-post')
 def create_post(post: PostCreate, db: Session = Depends(get_db)):
     new_post = Post(
-        author_handle='some_user',
+        author_id='some_user',
         title=post.title,
         text_content=post.text_content,
         media_link=post.media_link,
