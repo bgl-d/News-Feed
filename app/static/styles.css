@@ -13,6 +13,8 @@ body {
   padding: 24px;
 }
 
+
+/* Navbar style */
 .floating-navbar {
   position: sticky;
   align-self: center;
@@ -31,6 +33,10 @@ body {
 }
 
 #create-post-button {
+  display: flex;
+  margin-top: 1rem;
+  align-items: center;
+  justify-content: center;
   margin-top: 1.25rem;
   height: 56px;
   width: 56px;
@@ -46,18 +52,24 @@ body {
 }
 
 #logout-button {
+  display: flex;
   margin-top: 1rem;
+  align-items: center;
+  justify-content: center;
   height: 56px;
   width: 56px;
   background-color: rgb(230, 230, 230);
   border: 0px;
-  color: rgba(0, 0, 0, 0.5)
+  color: rgba(0, 0, 0, 0.5);
+  line-height: 1;
 }
 
 #logout-button:hover{
   color: rgba(0, 0, 0, 0.7);
 }
 
+
+/* Feed style */
 .news-image {
   max-width: 250px;
   max-height: 250px;
@@ -84,6 +96,8 @@ body {
   color: rgba(0, 0, 0, 0.7);
 }
 
+
+/* Pagination style */
 .pagination {
   display: flex;
   justify-content: center;
@@ -108,6 +122,8 @@ body {
   background-color: #ddd;
 }
 
+
+/* Create post style */
 .overlay {
   position: fixed;
   inset: 0;
@@ -125,36 +141,80 @@ body {
 }
 
 .form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  background-color: white;
+  border-radius: 10px;
   width: min(50vw, 500px);
-  height: min(20vw, 200px);
-  max-width: 800px;
-  padding: 10px;
+  padding: 1rem;
   background-color: white;
   border-radius: 10px;
 }
 
 .form-container input {
-  display: block;
   width: 100%;
-  box-sizing: border-box;
 }
 
-.form-container .input-group + .input-group {
-  margin-top: 1rem;
-}
-
-#post-btn{
-  position: absolute;
-  display: block;
-  left: 50%;
-  transform: translateX(-50%);
-  margin: 1rem auto 0;
+.submit-btn{
+  border: none;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  max-width: 10rem;
+  border-radius: 5px;
   background-color: rgb(230, 230, 230);
-  max-width: 100px;
-  max-height: 40px;
   color: rgba(0, 0, 0, 0.5)
 }
 
-#post-btn:hover{
+.submit-btn:hover{
   color: rgba(0, 0, 0, 0.7);
+}
+
+
+/* Auth page style */
+.auth {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 1001;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.auth-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(30vw, 300px);
+  padding: 2rem;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+}
+
+.auth-form input{
+  background: rgba(0, 0, 0, 0.1);
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem;
+}
+
+.auth-box p{
+  margin-bottom: 0px;
+  margin-top: 1rem;
+}
+
+.change-auth-btn{
+  color:red;
+  border: none;
+  background: none;
 }

@@ -14,22 +14,31 @@
         <link rel="stylesheet" href="{{ url_for('static', path='styles.css') }}">
     </head>
     <body>
-        <div class="login">
-            <input type="Email" placeholder="Email"><br>
-            <input type="Password" placeholder="Password"><br>
-            <button type="submit">Login</button>
+        <div class="auth">
+            <div class="auth-box" id="auth-login-form" style="display: flex;">
+                <form class="auth-form" id="login">
+                    <input id="email-input" type="Email" placeholder="Email" required><br>
+                    <input type="Password" placeholder="Password" required><br>
+                    <button type="submit" class="submit-btn" id="login-btn">Login</button>
+                </form>
+                <p>Don't have an account?</p> 
+                <button class="change-auth-btn" onclick="openSignUp()">Sign Up</button>
+            </div>
+            
+            <div class="auth-box" id="auth-signup-form" style="display: none;">
+                <form class="auth-form" id="signup">
+                    <input type="Handle" placeholder="Handle" required><br>
+                    <input type="First name" placeholder="First name" required><br>
+                    <input type="Last name" placeholder="Last name" required><br>
+                    <input type="Email" placeholder="Email" required><br>
+                    <input type="Password" placeholder="Password" required><br>
+                    <input type="Password" placeholder="Repeat password" required><br>
+                    <button type="submit" class="submit-btn" id="signup-btn">Sign Up</button>
+                </form>    
+                <p>Already have an account?</p> 
+                <button class="change-auth-btn" onclick="openLogin()">Login</button>
+            </div>
         </div>
-        
-        <div class="sign-up">
-            <input type="Handle" placeholder="Handle"><br>
-            <input type="First name" placeholder="First name"><br>
-            <input type="Last name" placeholder="Last name"><br>
-            <input type="Email" placeholder="Email"><br>
-            <input type="Password" placeholder="Password"><br>
-            <input type="Password" placeholder="Repeat password"><br>
-            <button type="submit">Sign Up</button>
-        </div>
-        
         <script src="{{ url_for('static', path='auth.js') }}"></script>
     </body>
 </html>
